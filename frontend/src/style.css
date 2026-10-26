@@ -63,6 +63,13 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
+.wallet-feedback {
+  margin: 10px 0 0;
+  color: #a33c34;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .brand-name {
   color: var(--ink);
   font-size: 19px;
@@ -101,6 +108,12 @@ a {
 .wallet-button:hover,
 .outline-button:hover {
   background: #f0f5f0;
+}
+
+.wallet-button:disabled,
+.transfer-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
 }
 
 .hero {
@@ -187,6 +200,123 @@ p {
   margin-top: 24px;
   color: var(--muted);
   font-size: 13px;
+}
+
+.transfer-section {
+  padding: 0 0 48px;
+}
+
+.transfer-card {
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+}
+
+.transfer-card h2 {
+  margin: 10px 0 8px;
+  font-size: 24px;
+  letter-spacing: -0.6px;
+}
+
+.transfer-description,
+.wallet-hint {
+  margin-bottom: 16px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.wallet-state {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.wallet-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #c28639;
+}
+
+.wallet-indicator-connected {
+  background: var(--green);
+}
+
+.wallet-state .outline-button {
+  min-height: 32px;
+  margin-left: auto;
+  font-size: 12px;
+}
+
+.wallet-hint {
+  margin-bottom: 18px;
+}
+
+.transfer-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.form-field {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.form-field input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  outline: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.form-field input:focus {
+  border-color: var(--green);
+}
+
+.form-field input::placeholder {
+  color: #89928a;
+}
+
+.transfer-button {
+  justify-content: center;
+  min-height: 42px;
+  cursor: pointer;
+}
+
+.transfer-message {
+  margin: 14px 0 0;
+  color: var(--green-dark);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.transfer-error {
+  color: #a33c34;
+}
+
+.transfer-message a {
+  display: inline-block;
+  margin-left: 5px;
+  color: var(--green-dark);
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .stats {
@@ -590,6 +720,14 @@ p {
     grid-template-columns: 1fr;
     gap: 28px;
   }
+
+  .transfer-form {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .transfer-button {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 520px) {
@@ -643,6 +781,18 @@ p {
 
   .proposal-grid {
     grid-template-columns: 1fr;
+  }
+
+  .transfer-card {
+    padding: 18px;
+  }
+
+  .transfer-form {
+    grid-template-columns: 1fr;
+  }
+
+  .transfer-button {
+    grid-column: auto;
   }
 
   .footer {

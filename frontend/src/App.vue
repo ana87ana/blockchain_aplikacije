@@ -1,12 +1,32 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useProposalStore } from './stores/proposals'
+import {
+  connectWallet as connectMetaMask,
+  getWalletState,
+  isMetaMaskAvailable,
+  sendSepoliaEth,
+  switchToSepolia as switchMetaMaskToSepolia,
+} from './wallet'
 
 const proposalStore = useProposalStore()
 const selectedFilter = ref('all')
 const searchQuery = ref('')
 const notice = ref('')
+const account = ref('')
+const chainId = ref('')
+const walletError = ref('')
+const transferStatus = ref('')
+const transactionHash = ref('')
+const recipientAddress = ref('')
+const transferAmount = ref('')
+const isConnecting = ref(false)
+const isSending = ref(false)
 
+const isOnSepolia = computed(() => chainId.value === 11155111n)
+const shortAccount = computed(() =>
+  account.value ? `${account.value.slice(0, 6)}...${account.value.slice(-4)}` : '',
+)
 const filters = [
   { id: 'all', label: 'Svi prijedlozi' },
   { id: 'active', label: 'U tijeku' },
@@ -29,9 +49,100 @@ const visibleProposals = computed(() => {
   })
 })
 
-function showWalletNotice() {
-  notice.value = 'Povezivanje novčanika bit će dostupno kada povežemo aplikaciju s mrežom Sepolia.'
+function getWalletError(error) {
+  if (error?.code === 4001) return 'Zahtjev je odbijen u MetaMasku.'
+  if (error?.code === 'ACTION_REJECTED') return 'Zahtjev je odbijen u MetaMasku.'
+  if (error?.code === -32002) return 'MetaMask već obrađuje zahtjev. Otvori MetaMask i dovrši ga.'
+  if (error?.code === 4902) return 'Sepolia mreža nije dodana u MetaMask. Dodaj je pa pokušaj ponovno.'
+  return error?.message || 'Došlo je do pogreške pri komunikaciji s MetaMaskom.'
 }
+
+async function refreshWallet() {
+  if (!isMetaMaskAvailable()) return
+
+  try {
+    const wallet = await getWalletState()
+    account.value = wallet.account
+    chainId.value = wallet.chainId
+  } catch (error) {
+    walletError.value = getWalletError(error)
+  }
+}
+
+async function connectWallet() {
+  walletError.value = ''
+  isConnecting.value = true
+  try {
+    const wallet = await connectMetaMask()
+    account.value = wallet.account
+    chainId.value = wallet.chainId
+    if (!wallet.account) {
+      walletError.value = 'MetaMask nije vratio odabrani račun. Pokušaj ponovno.'
+    }
+  } catch (error) {
+    walletError.value = getWalletError(error)
+  } finally {
+    isConnecting.value = false
+  }
+}
+
+async function switchToSepolia() {
+  walletError.value = ''
+  try {
+    chainId.value = await switchMetaMaskToSepolia()
+  } catch (error) {
+    walletError.value = getWalletError(error)
+  }
+}
+
+async function sendTransaction() {
+  walletError.value = ''
+  transferStatus.value = ''
+  transactionHash.value = ''
+
+  if (!account.value) {
+    walletError.value = 'Prvo poveži svoj MetaMask novčanik.'
+    return
+  }
+  if (!isOnSepolia.value) {
+    walletError.value = 'Za slanje transakcije prebaci MetaMask na Sepolia mrežu.'
+    return
+  }
+  isSending.value = true
+  try {
+    transactionHash.value = await sendSepoliaEth(
+      recipientAddress.value,
+      transferAmount.value,
+    )
+    transferStatus.value = 'Transakcija je poslana. Pričekaj potvrdu na Sepolia mreži.'
+  } catch (error) {
+    walletError.value = getWalletError(error)
+  } finally {
+    isSending.value = false
+  }
+}
+
+function handleAccountsChanged(accounts) {
+  account.value = accounts[0] || ''
+  if (!account.value) transferStatus.value = ''
+}
+
+function handleChainChanged(newChainId) {
+  chainId.value = BigInt(newChainId)
+}
+
+onMounted(() => {
+  if (!isMetaMaskAvailable()) return
+  window.ethereum.on('accountsChanged', handleAccountsChanged)
+  window.ethereum.on('chainChanged', handleChainChanged)
+  refreshWallet()
+})
+
+onUnmounted(() => {
+  if (!isMetaMaskAvailable()) return
+  window.ethereum.removeListener('accountsChanged', handleAccountsChanged)
+  window.ethereum.removeListener('chainChanged', handleChainChanged)
+})
 
 function showProposalNotice() {
   notice.value = 'Kreiranje prijedloga uskoro će biti dostupno.'
@@ -50,10 +161,18 @@ function showProposalNotice() {
         <a class="nav-link" href="#kako-radi">Kako funkcionira</a>
       </nav>
 
-      <button class="wallet-button" type="button" @click="showWalletNotice">
-        <span>Poveži novčanik</span>
+      <button
+        class="wallet-button"
+        type="button"
+        :disabled="isConnecting"
+        @click="connectWallet"
+      >
+        <span>{{ isConnecting ? 'Povezivanje...' : shortAccount || 'Poveži novčanik' }}</span>
       </button>
     </header>
+    <p v-if="walletError" class="wallet-feedback" role="alert">
+      {{ walletError }}
+    </p>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
@@ -75,6 +194,72 @@ function showProposalNotice() {
           <div class="network-note">
             Transparentno glasanje na Ethereum Sepolia mreži
           </div>
+        </div>
+      </section>
+
+      <section class="transfer-section" aria-labelledby="transfer-title">
+        <div class="transfer-card">
+          <div class="eyebrow section-eyebrow">SEPOLIA TESTNA MREŽA</div>
+          <h2 id="transfer-title">Pošalji ETH kolegi</h2>
+          <p class="transfer-description">
+            Pošalji testni ETH na adresu kolege. Transakciju ćeš pregledati i potvrditi u MetaMasku.
+          </p>
+
+          <div v-if="account" class="wallet-state">
+            <span class="wallet-indicator" :class="{ 'wallet-indicator-connected': isOnSepolia }"></span>
+            <span>{{ shortAccount }} · {{ isOnSepolia ? 'Spojeno na Sepolia' : 'Pogrešna mreža' }}</span>
+            <button v-if="!isOnSepolia" class="outline-button" type="button" @click="switchToSepolia">
+              Prebaci na Sepolia
+            </button>
+          </div>
+          <p v-else class="wallet-hint">Poveži MetaMask novčanik za slanje transakcije.</p>
+
+          <form class="transfer-form" @submit.prevent="sendTransaction">
+            <label class="form-field">
+              <span>Adresa primatelja</span>
+              <input
+                v-model="recipientAddress"
+                type="text"
+                inputmode="text"
+                autocomplete="off"
+                placeholder="0x..."
+                required
+              />
+            </label>
+            <label class="form-field">
+              <span>Iznos (ETH)</span>
+              <input
+                v-model="transferAmount"
+                type="text"
+                inputmode="decimal"
+                autocomplete="off"
+                placeholder="0.01"
+                required
+              />
+            </label>
+            <button
+              class="primary-button transfer-button"
+              type="submit"
+              :disabled="isSending || !account || !isOnSepolia"
+            >
+              {{ isSending ? 'Slanje...' : 'Pošalji ETH' }}
+            </button>
+          </form>
+
+          <p v-if="walletError" class="transfer-message transfer-error" role="alert">
+            {{ walletError }}
+          </p>
+          <p v-if="transferStatus" class="transfer-message" role="status">
+            {{ transferStatus }}
+            <a
+              v-if="transactionHash"
+              :href="`https://sepolia.etherscan.io/tx/${transactionHash}`"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Pogledaj transakciju
+            </a>
+          </p>
         </div>
       </section>
 
