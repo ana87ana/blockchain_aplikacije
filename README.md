@@ -6,8 +6,8 @@
 
 ### Godina: 2. godina
 
-### Aplikacija StudentVote: 
-    - Aplikacija koja omogućuje članovima studentske zajednice kreiranje prijedloga i transparentno glasanje putem pametnih ugovora
+### Aplikacija Kluba mladih:
+    - Članovi predlažu i biraju zajedničke aktivnosti poput filmskih večeri, knjižnog kluba, izleta i odlazaka na koncerte
 
 ## Slanje ETH-a putem frontenda
 

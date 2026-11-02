@@ -18,3 +18,13 @@
 - Što sam dodao u AGENTS.md: Ništa
 - Provjera: npm run dev i slanje Sepolie kolegi
 - Commit: Dodana mogućnost povezivanja Walleta i mogućnost transakcije
+
+## T3 — Specifikacija prije koda (02.11.2026.)
+- Cilj termina: napisati specifikaciju svog tokena i modula koja je dovoljno precizna da AI iz nje može napisati
+pametni ugovor bez nagađanja
+- Najkorisniji prompt (kopiran u cijelosti): 
+- Što je AI napravio dobro: 
+- Što je AI napravio drugačije nego što sam očekivao:
+- Što sam dodao u AGENTS.md: 
+- Provjera: 
+- Commit: 

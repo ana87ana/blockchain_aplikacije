@@ -145,15 +145,15 @@ onUnmounted(() => {
 })
 
 function showProposalNotice() {
-  notice.value = 'Kreiranje prijedloga uskoro će biti dostupno.'
+  notice.value = 'Kreiranje prijedloga aktivnosti uskoro će biti dostupno.'
 }
 </script>
 
 <template>
   <div class="site-shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="StudentVote početna stranica">
-        <span class="brand-name">StudentVote</span>
+      <a class="brand" href="#" aria-label="Klub mladih početna stranica">
+        <span class="brand-name">Klub mladih</span>
       </a>
 
       <nav class="main-nav" aria-label="Glavna navigacija">
@@ -178,17 +178,17 @@ function showProposalNotice() {
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <div class="eyebrow">ZAJEDNO ODLUČUJEMO</div>
-          <h1 id="hero-title">Tvoj glas.<br />Naša <span>zajednička</span> budućnost.</h1>
+          <h1 id="hero-title">Tvoj glas.<br />Naše <span>sljedeće</span> druženje.</h1>
           <p class="hero-description">
-            Predloži ideju, podrži promjene i sudjeluj u odlukama koje oblikuju
-            studentski život.
+            Predloži aktivnost i pomozi odlučiti što ćemo zajedno organizirati —
+            filmsku večer, knjižni klub, izlet ili odlazak na koncert.
           </p>
           <div class="hero-actions">
             <a class="primary-button" href="#prijedlozi">
-              Istraži prijedloge
+              Istraži aktivnosti
             </a>
             <button class="text-button" type="button" @click="showProposalNotice">
-              Predloži ideju
+              Predloži aktivnost
             </button>
           </div>
           <div class="network-note">
@@ -263,12 +263,12 @@ function showProposalNotice() {
         </div>
       </section>
 
-      <section class="stats" aria-label="StudentVote u brojkama">
+      <section class="stats" aria-label="Klub mladih u brojkama">
         <div class="stat-item">
-          <span class="stat-copy"><strong>1.240+</strong><small>članova zajednice</small></span>
+          <span class="stat-copy"><strong>1.240+</strong><small>članova kluba</small></span>
         </div>
         <div class="stat-item">
-          <span class="stat-copy"><strong>{{ proposalStore.proposals.length }}</strong><small>objavljena prijedloga</small></span>
+          <span class="stat-copy"><strong>{{ proposalStore.proposals.length }}</strong><small>prijedloga aktivnosti</small></span>
         </div>
         <div class="stat-item">
           <span class="stat-copy"><strong>{{ proposalStore.totalVotes }}</strong><small>zabilježenih glasova</small></span>
@@ -281,17 +281,17 @@ function showProposalNotice() {
       <section id="prijedlozi" class="proposals-section" aria-labelledby="proposals-title">
         <div class="section-heading">
           <div>
-            <div class="eyebrow section-eyebrow">TVOJA ZAJEDNICA, TVOJ UTJECAJ</div>
-            <h2 id="proposals-title">Prijedlozi zajednice</h2>
-            <p>Ideje koje mogu učiniti studentski život boljim.</p>
+            <div class="eyebrow section-eyebrow">TVOJ KLUB, TVOJE IDEJE</div>
+            <h2 id="proposals-title">Što ćemo zajedno raditi?</h2>
+            <p>Pregledaj prijedloge aktivnosti i glasaj za one koje želiš posjetiti.</p>
           </div>
           <button class="outline-button" type="button" @click="showProposalNotice">
-            <span>+</span> Novi prijedlog
+            <span>+</span> Nova aktivnost
           </button>
         </div>
 
         <div class="proposal-toolbar">
-          <div class="filter-list" role="tablist" aria-label="Filtriraj prijedloge">
+          <div class="filter-list" role="tablist" aria-label="Filtriraj aktivnosti">
             <button
               v-for="filter in filters"
               :key="filter.id"
@@ -306,7 +306,7 @@ function showProposalNotice() {
             </button>
           </div>
           <label class="search-box">
-            <input v-model="searchQuery" type="search" placeholder="Pretraži prijedloge" aria-label="Pretraži prijedloge" />
+            <input v-model="searchQuery" type="search" placeholder="Pretraži aktivnosti" aria-label="Pretraži aktivnosti" />
           </label>
         </div>
 
@@ -347,7 +347,7 @@ function showProposalNotice() {
           </article>
         </div>
         <div v-else class="empty-state">
-          <strong>Nema pronađenih prijedloga</strong>
+          <strong>Nema pronađenih aktivnosti</strong>
           <p>Pokušaj promijeniti pretragu ili odabrani filter.</p>
         </div>
       </section>
@@ -355,8 +355,8 @@ function showProposalNotice() {
       <section id="kako-radi" class="how-it-works">
         <div class="how-copy">
           <div class="eyebrow section-eyebrow">JEDNOSTAVNO I TRANSPARENTNO</div>
-          <h2>Promjene počinju<br />jednim glasom.</h2>
-          <p>StudentVote koristi governance tokene kako bi članovi zajednice mogli ravnopravno sudjelovati u donošenju odluka.</p>
+          <h2>Sljedeće druženje<br />počinje tvojim glasom.</h2>
+          <p>Članovi Kluba mladih odlučuju koje će aktivnosti zajedno organizirati.</p>
         </div>
         <div class="steps">
           <div class="step">
@@ -365,7 +365,7 @@ function showProposalNotice() {
           </div>
           <div class="step">
             <span class="step-number">02</span>
-            <div><strong>Odaberi prijedlog</strong><p>Pregledaj ideje i odaberi onu koja ti je važna.</p></div>
+            <div><strong>Odaberi aktivnost</strong><p>Pregledaj ideje poput filmske večeri, knjižnog kluba, izleta ili koncerta.</p></div>
           </div>
           <div class="step">
             <span class="step-number">03</span>
@@ -376,10 +376,10 @@ function showProposalNotice() {
     </main>
 
     <footer class="footer">
-      <a class="brand footer-brand" href="#" aria-label="StudentVote početna stranica">
-        <span class="brand-name">StudentVote</span>
+      <a class="brand footer-brand" href="#" aria-label="Klub mladih početna stranica">
+        <span class="brand-name">Klub mladih</span>
       </a>
-      <p>Stvoreno za studentsku zajednicu.</p>
+      <p>Stvoreno za članove Kluba mladih.</p>
       <span class="footer-network">Sepolia testna mreža</span>
     </footer>
 

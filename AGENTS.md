@@ -1,9 +1,9 @@
 # Pravila projekta
 
 ## Projekt
-- Naziv: StudentVote
-- Zajednica: Studentska zajednica
-- Opis: Aplikacija koja omogućuje članovima studentske zajednice kreiranje prijedloga i transparentno glasanje putem pametnih ugovora na Ethereum Sepolia mreži, pri čemu se pravo glasa određuje na temelju vlasništva nad governance tokenima.
+- Naziv: Klub mladih
+- Zajednica: Klub mladih
+- Opis: Aplikacija koja članovima Kluba mladih omogućuje predlaganje aktivnosti i glasanje o filmskim večerima, knjižnom klubu, izletima, koncertima i drugim zajedničkim druženjima. Glasanje je predviđeno putem pametnih ugovora na Ethereum Sepolia mreži, a pravo glasa određuje se vlasništvom nad governance tokenima.
 
 ## Stack (koristi točno ove verzije)
 - Frontend: Vue 3 (script setup), Pinia, Vite, u mapi frontend/

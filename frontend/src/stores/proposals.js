@@ -5,10 +5,10 @@ export const useProposalStore = defineStore('proposals', {
     proposals: [
       {
         id: 1,
-        title: 'Više prostora za učenje u večernjim satima',
+        title: 'Filmska večer petkom',
         description:
-          'Produžimo radno vrijeme čitaonice tijekom ispitnih rokova i osigurajmo miran prostor za sve studente.',
-        category: 'Studentski standard',
+          'Okupimo se jednom tjedno uz dobar film, grickalice i druženje nakon projekcije.',
+        category: 'Filmska večer',
         status: 'active',
         votesFor: 128,
         votesAgainst: 34,
@@ -18,10 +18,10 @@ export const useProposalStore = defineStore('proposals', {
       },
       {
         id: 2,
-        title: 'Održivi povratni sustav za čaše',
+        title: 'Pokrenimo knjižni klub',
         description:
-          'Uvedimo povratne čaše u studentske kantine i smanjimo količinu jednokratne plastike na kampusu.',
-        category: 'Održivost',
+          'Birajmo knjigu svakog mjeseca i nađimo se za opušten razgovor o pročitanom.',
+        category: 'Knjižni klub',
         status: 'active',
         votesFor: 96,
         votesAgainst: 21,
@@ -31,10 +31,10 @@ export const useProposalStore = defineStore('proposals', {
       },
       {
         id: 3,
-        title: 'Radionice financijske pismenosti',
+        title: 'Jednodnevni izlet u prirodu',
         description:
-          'Organizirajmo besplatne mjesečne radionice o osobnim financijama, stipendijama i studentskim pravima.',
-        category: 'Edukacija',
+          'Provedimo dan zajedno na izletu, uz šetnju, istraživanje i zajednički ručak.',
+        category: 'Izleti',
         status: 'active',
         votesFor: 74,
         votesAgainst: 18,
@@ -44,10 +44,10 @@ export const useProposalStore = defineStore('proposals', {
       },
       {
         id: 4,
-        title: 'Uređenje zajedničke studentske terase',
+        title: 'Zajedno na koncert',
         description:
-          'Pretvorimo neiskorišteni prostor u ugodno mjesto za druženje, odmor i studentska događanja.',
-        category: 'Kampus',
+          'Odaberimo koncert na koji ćemo otići kao ekipa i dogovorimo zajednički prijevoz.',
+        category: 'Koncerti',
         status: 'ended',
         votesFor: 183,
         votesAgainst: 42,
