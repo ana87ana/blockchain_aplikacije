@@ -32,16 +32,20 @@ Za svaki nalaz navedi točan odjeljak i predloži konkretan kriterij prihvaćanj
 Ne prepravljaj specifikaciju i ne hvali je.
 to moraš napraviti za spec.md koji ti je dodan u kontekst
 
-- Što je AI napravio dobro: 
-- Što je AI napravio drugačije nego što sam očekivao:
-- Što sam dodao u AGENTS.md: 
-- Provjera: 
+- Što je AI napravio dobro: postavlja pitanja prije svake odluke
+- Što je AI napravio drugačije nego što sam očekivao: 
+- Što sam dodao u AGENTS.md: Promjena teme projekta, novi naziv i opic
+- Provjera: npm run dev radi i interface prolazi u remix.live bez grešaka
 - Commit: 
 
 | Nalaz | Odluka (prihvaćeno / odbijeno) | Obrazloženje |
 |---|---|---|
 | 1. Izdavanje nakon aktivnosti je istodobno opisano kao pravilo i kao nerazrađeno | prihvaćeno | Detalji neki su još podložni promjenama pa u odgovorima nisu dani speifični uvjeti |
-| 3. Administratorska uloga je obvezna, ali početno postavljanje i oporavak nisu definirani | prihvaćeno | |
+
+| 3. Administratorska uloga je obvezna, ali početno postavljanje i oporavak nisu definirani | prihvaćeno | U prvoj verziji specifikacije nije spomenuto ni postavljanje ni oporavak, što je AI kao kritičar uočio i to je sad ispravljeno |
+
 | 4. Prijenosno odobrenje nije dovoljno precizno definirano da bi se znalo što točno odobrava | odbijeno | Nalaz je odbijen jer iako je kritika dobro postavljena, rješenje nije bilo zadovoljavajuće. Predloženo je povezivanje odobravanja s korisnicima, a ne s adminom |
-| 5. Nisu određeni rubni uvjeti iznosa i adresa | prihvaćeno | |
-| 6. Kriterij ne pokriva ponovljeno izdavanje za isto sudjelovanje | prihvaćeno | |
+
+| 5. Nisu određeni rubni uvjeti iznosa i adresa | prihvaćeno | Na početku nisu bili specificirani uvjeti, sada je točno određeno koliko se smije prenijesti i tko smije poslati token kako bi glasanje bilo moguće|
+
+| 6. Kriterij ne pokriva ponovljeno izdavanje za isto sudjelovanje | prihvaćeno | Nije bilo specificirano prije, član može dobiti određenu količinu tokena za sudjelovanje samo jednom|
