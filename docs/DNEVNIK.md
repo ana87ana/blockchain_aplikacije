@@ -36,7 +36,7 @@ to moraš napraviti za spec.md koji ti je dodan u kontekst
 - Što je AI napravio drugačije nego što sam očekivao: 
 - Što sam dodao u AGENTS.md: Promjena teme projekta, novi naziv i opic
 - Provjera: npm run dev radi i interface prolazi u remix.live bez grešaka
-- Commit: 
+- Commit: 72da7a3654037b8cc44f105133950cbf84688571
 
 | Nalaz | Odluka (prihvaćeno / odbijeno) | Obrazloženje |
 |---|---|---|
