@@ -21,9 +21,10 @@
 - Broj decimala: `3`
 - Izdavanje: administrator odobrava izdavanje tokena nakon potvrde sudjelovanja člana u aktivnosti. Administrator može dodijeliti tokene i u drugim slučajevima, ali pravila i uvjeti za te dodjele tek će se definirati.
 - Ukupna količina: nije unaprijed ograničena.
+- Količina: Ugovor odbija izdavanje i prijenos količine nula te primatelja nulte adrese; prihvaća samo cjelobrojnu količinu najmanjih jedinica tokena. Iznos iznad maksimalno podržane vrijednosti ne mijenja stanje i uzrokuje neuspjeh s točno navedenom porukom
 - Prenosivost: prijenos je dopušten samo uz prethodno, zasebno odobrenje administratora za taj prijenos. Mogućnost odobravanja od drugih osoba nije definirana za ovu verziju.
 - Trošenje: tokeni se troše pri glasanju. Količina tokena koja se troši po glasanju i način na koji se količina tokena odražava na glas još nisu definirani.
-- Administratori: jedan administratorski novčanik; njegova adresa i način početnog postavljanja nisu definirani.
+- Administratori: jedan administratorski novčanik. Pri postavljanju ugovora administrator je adresa navedena u konstruktoru; nulta adresa ne može biti administrator. Ako se podržava promjena administratora, samo trenutačni administrator može postaviti novu valjanu adresu, a nakon uspjeha stari administrator više ne može pozivati zaštićene funkcije
 - Gubitak ključa: privatni ključ se ne može obnoviti. Preporuka analitičara, koja još nije potvrđena: unaprijed odrediti zamjenski novčanik koji može preuzeti administratorsku ulogu.
 
 ## Odluke o modulu
@@ -40,6 +41,10 @@
 | Odobravanje prijenosa | Administrator | Podaci o prijenosu | Zasebno odobrava pojedini prijenos prije njegova izvršenja. | Pozivatelj nije administrator: `Samo administrator moze odobriti prijenos ZTN-a.` |
 | Prijenos tokena | Član koji šalje tokene, nakon prethodnog odobrenja administratora | Primatelj i količina tokena | Prenosi tokene samo ako je taj prijenos prethodno odobren. | Prijenos nije prethodno odobren: `Prijenos ZTN-a nije odobren.`; pošiljatelj nema dovoljnu količinu: `Nedovoljno ZTN-a za prijenos.` |
 | Predlaganje aktivnosti i glasanje | Član Kluba mladih | Pravila i ulazni podaci još nisu definirani | Omogućuje predlaganje aktivnosti i sudjelovanje u glasanju; glasanje troši tokene. | Uvjeti i poruke pogreške još nisu definirani. |
+
+### Dodatni komentari
+- Za aktivnost s jedinstvenim ID-jem i člana s jedinstvenom adresom, nakon evidentiranja potvrde sudjelovanja administrator može izdati točno definiranu količinu tokena; drugi pokušaj izdavanja za istu kombinaciju aktivnosti i člana ne mijenja stanje tokena.”
+- Nakon uspješnog izdavanja za određeni par aktivnosti i člana, svaki ponovljeni pokušaj izdavanja za isti par ne uspije i ne mijenja ukupnu količinu ni stanje člana
 
 ## Matrica ovlasti
 
