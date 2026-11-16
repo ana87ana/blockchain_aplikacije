@@ -51,12 +51,28 @@ to moraš napraviti za spec.md koji ti je dodan u kontekst
 | 6. Kriterij ne pokriva ponovljeno izdavanje za isto sudjelovanje | prihvaćeno | Nije bilo specificirano prije, član može dobiti određenu količinu tokena za sudjelovanje samo jednom|
 
 ## T4 — Testovi(16.11.2026.)
-- Cilj termina: Upoznati se s Hardhatom i provesti test nad ugovorima
-- Najkorisniji prompt (kopiran u cijelosti):
-- Što je AI napravio dobro: 
-- Što je AI napravio drugačije nego što sam očekivao: 
-- Što sam dodao u AGENTS.md: 
-- Provjera: 
+- Cilj termina: Upoznati se s Hardhatom i provesti testove
+- Najkorisniji prompt (kopiran u cijelosti): U docs/SPEC.md su kriteriji prihvaćanja za token (K1, K2, ...), a u
+contracts/lapp:klub_mladih.sol je ugovor.
+Napiši Hardhat 3 testove u test/ZTN.test.js: JavaScript (ne TypeScript),
+ESM,
+mocha + chai, ethers v6, na početku:
+import { network } from "hardhat"; const { ethers } = await
+network.connect();
+Pravila:
+- jedan it() po kriteriju tokena, naziv počinje oznakom kriterija (npr. "K3:
+...");
+- za neuspješne kriterije koristi revertedWith s točnom porukom iz ugovora;
+- za događaje koristi emit(...).withArgs(...);
+- svaki test sam priprema stanje u beforeEach, bez ovisnosti o drugim
+testovima;
+- ne mijenjaj ugovor; ako kriterij nije moguće testirati, napiši to kao
+komentar.
+
+- Što je AI napravio dobro: Konstantno pita dodatna pitanja kako bi vrlo precizno napravio što prompt traži
+- Što je AI napravio drugačije nego što sam očekivao: dodao mape koje nisam očekivala da će dodati
+- Što sam dodao u AGENTS.md: ništa
+- Provjera: npx hardhat test 
 - Commit: 
 - Prompt: Napiši Hardhat 3 testove u 'test/ZTN.test.js' za kriterije tokena iz 'docs/SPEC.md', koristeći JavaScript, ESM, Mocha, Chai i ethers v6; svaki test neka bude neovisan, a kriteriji koji se ne mogu testirati neka budu označeni komentarom.
 - Testova: 11, prolazi: 8
