@@ -143,6 +143,21 @@
 - Koji su uvjeti neuspjeha i točne poruke pogreške za glasanje i dodatnu dodjelu tokena?
 
 ## Sljedivost
+
+| Kriterij tokena | Test |
+|---|---|
+| K1 — Metapodaci tokena | `K1: vraca metapodatke tokena` |
+| K2 — Izdavanje nakon potvrde aktivnosti | `K2: izdaje tokene nakon potvrde aktivnosti` (preskocen: funkcija nije implementirana) |
+| K3 — Izdavanje tokena ne-administratoru | `K3: odbija izdavanje nakon aktivnosti od ne-administratora` (preskocen: funkcija nije implementirana) |
+| K4 — Dodjela tokena izvan aktivnosti ne-administratoru | `K4: odbija dodjelu tokena od ne-administratora` |
+| K5 — Odobravanje prijenosa ne-administratoru | `K5: odbija odobravanje prijenosa od ne-administratora` |
+| K6 — Prijenos bez prethodnog odobrenja | `K6: odbija prijenos bez prethodnog odobrenja` |
+| K7 — Prijenos iznad raspolozivog stanja | `K7: odbija odobreni prijenos iznad raspolozivog stanja` |
+| K8 — Prijenos nakon prethodnog odobrenja | `K8: izvrsi prethodno odobreni prijenos i emitira Transfer` |
+| K9 — Dodjela tokena izvan aktivnosti od strane administratora | `K9: administrator dodjeljuje tokene i povecava ukupnu kolicinu` |
+| K10 — Ukupna kolicina tokena bez unaprijed zadanog limita | `K10: prihvaca izdavanje vece od prethodne ukupne kolicine` |
+| K11 — Potrosnja tokena pri glasanju | `K11: trosi tokene nakon prihvacenog glasa` (preskocen: glasanje nije implementirano) |
+
 - Opis proizvoda i zajednice: zahtjev korisnika za glasanje članova Kluba mladih o zajedničkim aktivnostima.
 - Token: odgovori korisnika tijekom analize zahtjeva — naziv `Žeton`, oznaka `ZTN`, `3` decimale, izdavanje za sudjelovanje u aktivnostima, bez unaprijed ograničene ukupne količine, ograničeni prijenosi uz prethodno odobrenje administratora i trošenje tokena pri glasanju.
 - Uloge: odgovor korisnika — jedan administrator, koji potvrđuje izdavanje tokena, može dodatno dodjeljivati tokene prema pravilima koja će se definirati te odobrava svaki prijenos.

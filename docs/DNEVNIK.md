@@ -39,13 +39,17 @@ to moraš napraviti za spec.md koji ti je dodan u kontekst
 - Commit: 72da7a3654037b8cc44f105133950cbf84688571
 
 ## T4 — Testovi(16.11.2026.)
-- Cilj termina:
+- Cilj termina: Upoznati se s Hardhatom i provesti test nad ugovorima
 - Najkorisniji prompt (kopiran u cijelosti):
-- Što je AI napravio dobro:
+- Što je AI napravio dobro: 
 - Što je AI napravio drugačije nego što sam očekivao: 
 - Što sam dodao u AGENTS.md: 
 - Provjera: 
 - Commit: 
+- Prompt: Napiši Hardhat 3 testove u 'test/ZTN.test.js' za kriterije tokena iz 'docs/SPEC.md', koristeći JavaScript, ESM, Mocha, Chai i ethers v6; svaki test neka bude neovisan, a kriteriji koji se ne mogu testirati neka budu označeni komentarom.
+- Testova: 11, prolazi: 8
+- Greška AI-ja koju sam uočio: nije bilo pada testa, 'network.connect()' prikazao je bezopasno upozorenje o zastarijevanju.
+- Mutacijska provjera: maknuo sam 'require(msg.sender == owner(), "Samo administrator moze dodijeliti ZTN.");', pao je test 'K4: odbija dodjelu tokena od ne-administratora', a 'require' je vraćen.
 
 | Nalaz | Odluka (prihvaćeno / odbijeno) | Obrazloženje |
 |---|---|---|
