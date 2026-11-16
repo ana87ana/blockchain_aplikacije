@@ -2,39 +2,11 @@
 pragma solidity ^0.8.24;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
-interface I_app_klub_mladih_Token {
-    event Transfer(address indexed from, address indexed to, uint256 value);
-    event Approval(address indexed owner, address indexed spender, uint256 value);
-
-    /// Uloga: bilo tko moze procitati; SPEC: K1.
-    function name() external view returns (string memory);
-
-    /// Uloga: bilo tko moze procitati; SPEC: K1.
-    function symbol() external view returns (string memory);
-
-    /// Uloga: bilo tko moze procitati; SPEC: K1.
-    function decimals() external view returns (uint8);
-
-    /// Uloga: bilo tko moze procitati; SPEC: K2, K9, K10.
-    function totalSupply() external view returns (uint256);
-
-    /// Uloga: bilo tko moze procitati; SPEC: model podataka na lancu.
-    function balanceOf(address account) external view returns (uint256);
-
-    /// Uloga: vlasnik tokena; SPEC: K6, K7, K8.
-    function transfer(address to, uint256 amount) external returns (bool);
-
-    /// Uloga: bilo tko moze procitati; SPEC: ERC-20 API.
-    function allowance(address owner, address spender) external view returns (uint256);
-
-    /// Uloga: vlasnik tokena; SPEC: ERC-20 API.
-    function approve(address spender, uint256 value) external returns (bool);
-
-    /// Uloga: potrosac kojemu je odobrena kolicina; SPEC: ERC-20 API.
-    function transferFrom(address from, address to, uint256 value) external returns (bool);
-
+interface I_app_klub_mladih_Token is IERC20Metadata {
     /// Uloga: samo administrator; SPEC: prijenos uz prethodno zasebno odobrenje.
     function odobriPrijenos(address posiljatelj, address primatelj, uint256 kolicina) external;
 
@@ -48,24 +20,24 @@ interface I_app_klub_mladih_Token {
 // Funkcije nisu deklarirane jer ulazi i pravila predlaganja i glasanja nisu definirani.
 interface I_app_klub_mladih_Modul {}
 
-contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
+contract ZTN is ERC20, Ownable, I_app_klub_mladih_Token {
     mapping(address posiljatelj => mapping(address primatelj => mapping(uint256 kolicina => bool odobreno)))
         private _odobreniPrijenosi;
 
     constructor() ERC20(unicode"Žeton", "ZTN") Ownable(msg.sender) {}
 
     /// Uloga: bilo tko moze procitati; SPEC: K1.
-    function name() public view override(ERC20, I_app_klub_mladih_Token) returns (string memory) {
+    function name() public view override(ERC20, IERC20Metadata) returns (string memory) {
         return super.name();
     }
 
     /// Uloga: bilo tko moze procitati; SPEC: K1.
-    function symbol() public view override(ERC20, I_app_klub_mladih_Token) returns (string memory) {
+    function symbol() public view override(ERC20, IERC20Metadata) returns (string memory) {
         return super.symbol();
     }
 
     /// Uloga: bilo tko moze procitati; SPEC: K1.
-    function decimals() public pure override(ERC20, I_app_klub_mladih_Token) returns (uint8) {
+    function decimals() public pure override(ERC20, IERC20Metadata) returns (uint8) {
         return 3;
     }
 
@@ -73,7 +45,7 @@ contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
     function totalSupply()
         public
         view
-        override(ERC20, I_app_klub_mladih_Token)
+        override(ERC20, IERC20)
         returns (uint256)
     {
         return super.totalSupply();
@@ -83,7 +55,7 @@ contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
     function balanceOf(address account)
         public
         view
-        override(ERC20, I_app_klub_mladih_Token)
+        override(ERC20, IERC20)
         returns (uint256)
     {
         return super.balanceOf(account);
@@ -93,7 +65,7 @@ contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
     function allowance(address account, address spender)
         public
         view
-        override(ERC20, I_app_klub_mladih_Token)
+        override(ERC20, IERC20)
         returns (uint256)
     {
         return super.allowance(account, spender);
@@ -102,7 +74,7 @@ contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
     /// Uloga: vlasnik tokena; SPEC: K6, K7, K8.
     function transfer(address to, uint256 value)
         public
-        override(ERC20, I_app_klub_mladih_Token)
+        override(ERC20, IERC20)
         returns (bool)
     {
         return super.transfer(to, value);
@@ -111,7 +83,7 @@ contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
     /// Uloga: vlasnik tokena; SPEC: ERC-20 API.
     function approve(address spender, uint256 value)
         public
-        override(ERC20, I_app_klub_mladih_Token)
+        override(ERC20, IERC20)
         returns (bool)
     {
         return super.approve(spender, value);
@@ -120,7 +92,7 @@ contract AppKlubMladihToken is ERC20, Ownable, I_app_klub_mladih_Token {
     /// Uloga: potrosac kojemu je odobrena kolicina; SPEC: ERC-20 API.
     function transferFrom(address from, address to, uint256 value)
         public
-        override(ERC20, I_app_klub_mladih_Token)
+        override(ERC20, IERC20)
         returns (bool)
     {
         return super.transferFrom(from, to, value);

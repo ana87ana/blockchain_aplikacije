@@ -34,9 +34,18 @@ to moraš napraviti za spec.md koji ti je dodan u kontekst
 
 - Što je AI napravio dobro: postavlja pitanja prije svake odluke
 - Što je AI napravio drugačije nego što sam očekivao: 
-- Što sam dodao u AGENTS.md: Promjena teme projekta, novi naziv i opic
+- Što sam dodao u AGENTS.md: Promjena teme projekta, novi naziv i opis
 - Provjera: npm run dev radi i interface prolazi u remix.live bez grešaka
 - Commit: 72da7a3654037b8cc44f105133950cbf84688571
+
+## T4 — Testovi(16.11.2026.)
+- Cilj termina:
+- Najkorisniji prompt (kopiran u cijelosti):
+- Što je AI napravio dobro:
+- Što je AI napravio drugačije nego što sam očekivao: 
+- Što sam dodao u AGENTS.md: 
+- Provjera: 
+- Commit: 
 
 | Nalaz | Odluka (prihvaćeno / odbijeno) | Obrazloženje |
 |---|---|---|

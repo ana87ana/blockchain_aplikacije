@@ -1,0 +1,31 @@
+{
+  "name": "blockchain_aplikacije",
+  "version": "1.0.0",
+  "description": "- Članovi predlažu i biraju zajedničke aktivnosti poput filmskih večeri, knjižnog kluba, izleta i odlazaka na koncerte",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ana87ana/blockchain_aplikacije.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ana87ana/blockchain_aplikacije/issues"
+  },
+  "homepage": "https://github.com/ana87ana/blockchain_aplikacije#readme",
+  "type": "module",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "^4.0.0",
+    "hardhat": "^3.22.0"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.6.1"
+  }
+}
