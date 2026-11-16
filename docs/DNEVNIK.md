@@ -73,7 +73,7 @@ komentar.
 - Što je AI napravio drugačije nego što sam očekivao: dodao mape koje nisam očekivala da će dodati
 - Što sam dodao u AGENTS.md: ništa
 - Provjera: npx hardhat test 
-- Commit: 
+- Commit: 3ee0c14980cdd8fe85b60b7beb2527997ede8991
 - Prompt: Napiši Hardhat 3 testove u 'test/ZTN.test.js' za kriterije tokena iz 'docs/SPEC.md', koristeći JavaScript, ESM, Mocha, Chai i ethers v6; svaki test neka bude neovisan, a kriteriji koji se ne mogu testirati neka budu označeni komentarom.
 - Testova: 11, prolazi: 8
 - Greška AI-ja koju sam uočio: nije bilo pada testa, 'network.connect()' prikazao je bezopasno upozorenje o zastarijevanju.
